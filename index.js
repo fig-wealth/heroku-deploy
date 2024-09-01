@@ -58,7 +58,7 @@ const addConfig = ({ app_name, env_file, appdir }) => {
 const createProcfile = ({ procfile, appdir }) => {
   if (procfile) {
     fs.writeFileSync(path.join(appdir, "Procfile"), procfile);
-    execSync(`git add -A && git commit -m "chore: Added Procfile"`);
+    execSync(`git add -A && git commit -m "chore: added procfile" || echo "No changes to commit"`);
     console.log("Written Procfile with custom configuration");
   }
 };
@@ -190,7 +190,7 @@ if (heroku.dockerBuildArgs) {
     const status = execSync("git status --porcelain").toString().trim();
     if (status) {
       execSync(
-        'git add -A && git commit -m "chore: Commited changes from previous actions"'
+        'git add -A && git commit -m "chore: commited changes from previous actions" || echo "No changes to commit"'
       );
     }
 
